@@ -308,6 +308,7 @@ int Platform_getCpuVcore_l(Meter* this) {
    Settings* settings = this->pl->settings;
    char *handler;
    char *cpu_core_policy;
+   handler = settings->CpuVCore_l_handler;
    if (handler[0] != 0) {
        cpu_core_policy = strchr(handler, '%');
        if (cpu_core_policy) {
@@ -337,6 +338,7 @@ int Platform_getCpuVcore_b(Meter* this) {
    Settings* settings = this->pl->settings;
    char *handler;
    char *cpu_core_policy;
+   handler = settings->CpuVCore_b_handler;
    if (handler[0] != 0) {
        cpu_core_policy = strchr(handler, '%');
        if (cpu_core_policy) {

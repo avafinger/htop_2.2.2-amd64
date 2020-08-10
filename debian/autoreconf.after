@@ -31,7 +31,7 @@ fad2e99f73fc97862bc25e0dc99f3d4c  ./dragonflybsd/DragonFlyBSDProcess.c
 c3ed7d655bd5906d23a25cf1a37f1f56  ./SwapMeter.c
 f5e45c8dc14ad5070c262f802ff7cdb8  ./autom4te.cache/output.0
 0f1f25c7c161d84b0bc100ebd4eb2923  ./autom4te.cache/traces.1
-667d5efe781a8083969cc240b849f650  ./autom4te.cache/requests
+142b76004b0b38f4f58ea369e608f828  ./autom4te.cache/requests
 70c0b517b7164f02caffa3d4c1cf6f3a  ./autom4te.cache/traces.0
 f5e45c8dc14ad5070c262f802ff7cdb8  ./autom4te.cache/output.1
 5f2a276ee7b8decec541391229d03591  ./missing
@@ -54,7 +54,7 @@ c919cecba6514a688673a615a0571bf3  ./RichString.c
 d898885fd76c7c72374b14b4dff04b31  ./aclocal.m4
 b3c75a8fadbc33e2dcf16d8107750690  ./configure
 8c52c8fc3035d2eb7e4d4e18cb8c6a45  ./ProcessList.c
-3d3504c00d7a4db431386dcaa3355d4c  ./CpuFreqMeter.c
+019b7544892f6e94394607cc8f06d0ae  ./CpuFreqMeter.c
 f311ed64d1aa03660119b1f8e0e7a1d0  ./Makefile.in
 3875880c407014445c8bf89670882b79  ./EnvScreen.c
 8960f64ca5b34bf42e0e48124b7d2c4a  ./UptimeMeter.c
@@ -70,7 +70,7 @@ c51a3fcea87c2bb0b59c8f19f4683b9d  ./InfoScreen.c
 b6fc261cef25cf58232bb8bbd22b9fd8  ./darwin/Battery.c
 dd35e4585be2a54309135baa118af2ee  ./darwin/DarwinProcess.c
 dbf03a684ec5cf9af8f3dfb7bdcb5d99  ./darwin/DarwinCRT.c
-c95416895c5dbd4438dba134514f5dbf  ./interfaces.c
+da0951a73e24acb94de3fe2152b05ded  ./interfaces.c
 0bdf0a551bcf0df5b90489a618c2bb4e  ./Meter.c
 fc235a591e3a3da4e59f9d1254b3d49b  ./SignalsPanel.c
 c29baf0f5ecb1110539dfc843fc7a2ad  ./LoadAverageMeter.c
@@ -108,13 +108,14 @@ c625d811f9e0033b64be37391943fd3a  ./Settings.c
 36438e04934e94041859929a89364b68  ./Process.c
 72293fc8ff20a1aa65eca500f5c48479  ./htop.desktop
 ade6d09f3053d98a7a60371a6ddbed01  ./UsersTable.c
+7e1b9f8ba1b84dfbdabc4850bffb52b6  ./README.md
 c1744a2799fe063106b88ac8ee8a50f4  ./NEWS
 e31dcc80388c0ec180ff3a173953d709  ./ChangeLog
 500b9244caa7a7ab23ece1db37efa76d  ./compile
 c9671feb88339208a8c34c54ac7a6eef  ./config.guess
 b6c6677af416877c255405f6072b3d60  ./IncSet.c
 b5c7fa0ad40418e748cb6da3f1e4c000  ./linux/LinuxCRT.c
-8847e21c7c25c2312492cbb2a7b2edff  ./linux/Platform.c
+b91bc7b6f915c3362b4e419c9df4f184  ./linux/Platform.c
 75d57eb5267f00310c0fa648722e17cc  ./linux/IOPriority.c
 9021dd3f1834eaa22c3ff03ca588e3d6  ./linux/Battery.c
 a4b6d833d2bb56178cf1bae4ab793e07  ./linux/LinuxProcess.c

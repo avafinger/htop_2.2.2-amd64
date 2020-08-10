@@ -16,6 +16,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <linux/if_link.h>
+#include <linux/if.h>
 #include <signal.h>
 
 #include "interfaces.h"
@@ -137,6 +138,8 @@ int findIP_interface(char *dev, char *szIP, int bufsz) {
                 if (s != 0) {
                    break;
                 }
+                if ((ifa->ifa_flags & IFF_UP) == 0)
+			       continue;
                 found_if = 1;
                 break;
             } 

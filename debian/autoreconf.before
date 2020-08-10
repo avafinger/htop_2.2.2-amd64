@@ -46,7 +46,7 @@ b8b785dc399c3d42bb801aa847702137  ./Armbian_Meter.c
 c919cecba6514a688673a615a0571bf3  ./RichString.c
 4fb3531675d0f2370af4216ffb076f0c  ./AvailableMetersPanel.c
 8c52c8fc3035d2eb7e4d4e18cb8c6a45  ./ProcessList.c
-3d3504c00d7a4db431386dcaa3355d4c  ./CpuFreqMeter.c
+019b7544892f6e94394607cc8f06d0ae  ./CpuFreqMeter.c
 3875880c407014445c8bf89670882b79  ./EnvScreen.c
 8960f64ca5b34bf42e0e48124b7d2c4a  ./UptimeMeter.c
 1d33821b651c6aeb656ecedfa287c7ab  ./ColumnsPanel.c
@@ -61,7 +61,7 @@ c51a3fcea87c2bb0b59c8f19f4683b9d  ./InfoScreen.c
 b6fc261cef25cf58232bb8bbd22b9fd8  ./darwin/Battery.c
 dd35e4585be2a54309135baa118af2ee  ./darwin/DarwinProcess.c
 dbf03a684ec5cf9af8f3dfb7bdcb5d99  ./darwin/DarwinCRT.c
-c95416895c5dbd4438dba134514f5dbf  ./interfaces.c
+da0951a73e24acb94de3fe2152b05ded  ./interfaces.c
 0bdf0a551bcf0df5b90489a618c2bb4e  ./Meter.c
 fc235a591e3a3da4e59f9d1254b3d49b  ./SignalsPanel.c
 c29baf0f5ecb1110539dfc843fc7a2ad  ./LoadAverageMeter.c
@@ -97,13 +97,14 @@ c625d811f9e0033b64be37391943fd3a  ./Settings.c
 36438e04934e94041859929a89364b68  ./Process.c
 72293fc8ff20a1aa65eca500f5c48479  ./htop.desktop
 ade6d09f3053d98a7a60371a6ddbed01  ./UsersTable.c
+7e1b9f8ba1b84dfbdabc4850bffb52b6  ./README.md
 c1744a2799fe063106b88ac8ee8a50f4  ./NEWS
 e31dcc80388c0ec180ff3a173953d709  ./ChangeLog
 500b9244caa7a7ab23ece1db37efa76d  ./compile
 c9671feb88339208a8c34c54ac7a6eef  ./config.guess
 b6c6677af416877c255405f6072b3d60  ./IncSet.c
 b5c7fa0ad40418e748cb6da3f1e4c000  ./linux/LinuxCRT.c
-8847e21c7c25c2312492cbb2a7b2edff  ./linux/Platform.c
+b91bc7b6f915c3362b4e419c9df4f184  ./linux/Platform.c
 75d57eb5267f00310c0fa648722e17cc  ./linux/IOPriority.c
 9021dd3f1834eaa22c3ff03ca588e3d6  ./linux/Battery.c
 a4b6d833d2bb56178cf1bae4ab793e07  ./linux/LinuxProcess.c
