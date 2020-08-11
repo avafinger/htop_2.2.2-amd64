@@ -140,6 +140,8 @@ int findIP_interface(char *dev, char *szIP, int bufsz) {
                 }
                 if ((ifa->ifa_flags & IFF_UP) == 0)
 			       continue;
+                if ((ifa->ifa_flags & IFF_RUNNING) == 0)
+			       continue;
                 found_if = 1;
                 break;
             } 
