@@ -4,7 +4,7 @@
 #define HEADER_CpuTempMeter
 /*
 htop - CpuTempMeter.h
-(C) 2018 @lex
+(C) 2020 @lex
 */
 
 #include "Meter.h"
@@ -12,5 +12,9 @@ htop - CpuTempMeter.h
 extern int CpuTempMeter_attributes[];
 
 extern MeterClass CpuTempMeter_class;
+
+extern int CoreTempMeter_attributes[];
+
+extern MeterClass CoreTempMeter_class;
 
 #endif

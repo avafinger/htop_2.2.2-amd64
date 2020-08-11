@@ -10,6 +10,7 @@ in the source distribution for its full text.
 
 #include "CPUMeter.h"
 #include "CpuFreqMeter.h"
+#include "CpuTempMeter.h"
 #include "Header.h"
 #include "ListItem.h"
 #include "Platform.h"
@@ -102,6 +103,9 @@ PanelClass AvailableMetersPanel_class = {
 
 AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* header, Panel* leftMeters, Panel* rightMeters, ScreenManager* scr, ProcessList* pl) {
    int i;
+   MeterClass* type;
+   int cpus;
+   int key;
     
    AvailableMetersPanel* this = AllocThis(AvailableMetersPanel);
    Panel* super = (Panel*) this;
@@ -120,12 +124,28 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
    for (i = 1; Platform_meterTypes[i]; i++) {
       MeterClass* type = Platform_meterTypes[i];
       assert(type != &CPUMeter_class);
+      if (type == &CoreTempMeter_class)
+          continue;
       const char* label = type->description ? type->description : type->uiName;
-      Panel_add(super, (Object*) ListItem_new(label, i << 16));
+      key = i << 16;
+      Panel_add(super, (Object*) ListItem_new(label, key));
    }
+   type = &CoreTempMeter_class;
+   cpus = pl->cpuCount;
+   if (cpus > 1) {
+      // Panel_add(super, (Object*) ListItem_new("CoreTemp average", 0));
+      for (i = 1; i <= cpus; i++) {
+         char buffer[50];
+         xSnprintf(buffer, 50, "%s %d", type->uiName, i);
+         Panel_add(super, (Object*) ListItem_new(buffer, i | (28 << 16)));
+      }
+   } else {
+      Panel_add(super, (Object*) ListItem_new("CoreTemp", 1 | (28 << 16)));
+   }
+
    // Handle (&CPUMeter_class)
-   MeterClass* type = &CPUMeter_class;
-   int cpus = pl->cpuCount;
+   type = &CPUMeter_class;
+   cpus = pl->cpuCount;
    if (cpus > 1) {
       Panel_add(super, (Object*) ListItem_new("CPU average", 0));
       for (i = 1; i <= cpus; i++) {

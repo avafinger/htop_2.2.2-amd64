@@ -168,7 +168,8 @@ MeterClass* Platform_meterTypes[] = {
    &Wlan1_Meter_class,
    &OSversion_Meter_class,
    &Kernelversion_Meter_class,
-   &Armbianversion_Meter_class,   
+   &Armbianversion_Meter_class,
+   &CoreTempMeter_class,
    NULL
 };
 
@@ -249,6 +250,36 @@ int Platform_getCpuTemp(Meter* this) {
    }
    return Temp;
 }
+
+int Platform_getCoreTemp(Meter* this, int cpu) {
+   int Temp = 0;
+   char szbuf[256];
+   Settings* settings = this->pl->settings;
+   char *handler;
+   char *cpu_core_policy;
+   
+   handler = settings->CpuTemp_handler;
+   if (handler[0] != 0) {
+       cpu_core_policy = strchr(handler, '%');
+       if (cpu_core_policy) {
+           // strcpy(szbuf, "/sys/class/thermal/thermal_zone0/temp");
+           xSnprintf(szbuf, sizeof(szbuf), handler, cpu);
+       } else {
+           strcpy(szbuf, handler);
+       }
+   } else {
+      // sleep_ms(30);
+      xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp%d_input", cpu);
+   }
+   FILE *fd = fopen(szbuf, "r");
+   if (fd) {
+      int n = fscanf(fd, "%d", &Temp);
+      fclose(fd);
+      if (n <= 0) return 0;
+   }
+   return Temp;
+}
+
 
 int Platform_getCpuFreq(Meter* this, int cpu) {
    int Freq = 0;

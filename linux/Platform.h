@@ -53,6 +53,8 @@ int Platform_getGpuTemp(Meter* this);
 
 int Platform_getCpuTemp(Meter* this);
 
+int Platform_getCoreTemp(Meter* this, int cpu);
+
 int Platform_getCpuFreq(Meter* this, int cpu);
 
 int Platform_getCpuVcore();

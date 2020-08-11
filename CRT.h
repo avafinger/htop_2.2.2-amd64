@@ -128,6 +128,7 @@ typedef enum ColorElements_ {
    DISTRO_VERSION,
    OS_VERSION,
    ARMBIAN_VERSION,
+   CORE_TEMP,
    LAST_COLORELEMENT
 } ColorElements;
 
