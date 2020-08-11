@@ -126,6 +126,8 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
       assert(type != &CPUMeter_class);
       if (type == &CoreTempMeter_class)
           continue;
+      if (type == &CoreFreqMeter_class)
+          continue;
       const char* label = type->description ? type->description : type->uiName;
       key = i << 16;
       Panel_add(super, (Object*) ListItem_new(label, key));
@@ -141,6 +143,19 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
       }
    } else {
       Panel_add(super, (Object*) ListItem_new("CoreTemp", 1 | (28 << 16)));
+   }
+
+   type = &CoreFreqMeter_class;
+   cpus = pl->cpuCount;
+   if (cpus > 1) {
+      // Panel_add(super, (Object*) ListItem_new("CoreFreq average", 0));
+      for (i = 1; i <= cpus; i++) {
+         char buffer[50];
+         xSnprintf(buffer, 50, "%s %d", type->uiName, i);
+         Panel_add(super, (Object*) ListItem_new(buffer, i | (29 << 16)));
+      }
+   } else {
+      Panel_add(super, (Object*) ListItem_new("CoreFreq", 1 | (29 << 16)));
    }
 
    // Handle (&CPUMeter_class)

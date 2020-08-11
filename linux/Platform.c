@@ -170,6 +170,7 @@ MeterClass* Platform_meterTypes[] = {
    &Kernelversion_Meter_class,
    &Armbianversion_Meter_class,
    &CoreTempMeter_class,
+   &CoreFreqMeter_class,   
    NULL
 };
 
@@ -299,8 +300,8 @@ int Platform_getCpuFreq(Meter* this, int cpu) {
        }
    } else {
       // sleep_ms(30);
-      // xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpufreq/policy%d/cpuinfo_cur_freq", cpu);
-      strcpy(szbuf, "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq");
+      xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpufreq/policy%d/cpuinfo_cur_freq", cpu);
+      // strcpy(szbuf, "/sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq");
    }
    fd = fopen(szbuf, "r");
    if (fd) {
@@ -311,6 +312,37 @@ int Platform_getCpuFreq(Meter* this, int cpu) {
    }
    return Freq;
 }
+
+int Platform_getCoreFreq(Meter* this, int cpu) {
+   int Freq = 0;
+   FILE* fd;
+   char szbuf[256];
+   Settings* settings = this->pl->settings;
+   char *handler;
+   char *cpu_core_policy;
+   
+   handler = settings->CpuFreq_handler;
+   if (handler[0] != 0) {
+       cpu_core_policy = strchr(handler, '%');
+       if (cpu_core_policy) {
+           xSnprintf(szbuf, sizeof(szbuf), handler, cpu);
+       } else {
+           strcpy(szbuf, handler);
+       }
+   } else {
+      // sleep_ms(30);
+      xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_cur_freq", cpu);
+   }
+   fd = fopen(szbuf, "r");
+   if (fd) {
+      int n;
+      n = fscanf(fd, "%d", &Freq);
+      fclose(fd);
+      if (n <= 0) return 0;
+   }
+   return Freq;
+}
+
 
 int Platform_getCpuVcore() {
    int Vcore = 0;

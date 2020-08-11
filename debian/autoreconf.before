@@ -5,7 +5,7 @@
 308d7dd40850694763ca193278c08a4d  ./scripts/MakeHeader.py
 ee08bdd41b70527a38055d8d724e7bb4  ./CheckItem.c
 ac1c8490cf320346639da96c81d4ed12  ./README
-0085f652d657a62b035282a606f8efb5  ./CpuTempMeter.c
+958d5718fdcd24cf841e4a67fa4d0e1a  ./CpuTempMeter.c
 bb891f58a36a10dadcafdf7bbec301a4  ./openbsd/OpenBSDProcess.c
 9e91fbf72dc14b28f89ad178e574d3d9  ./openbsd/Platform.c
 393b8a49f340d36ff9c971a7c5fda7c0  ./openbsd/Battery.c
@@ -32,7 +32,7 @@ fad2e99f73fc97862bc25e0dc99f3d4c  ./dragonflybsd/DragonFlyBSDProcess.c
 c3ed7d655bd5906d23a25cf1a37f1f56  ./SwapMeter.c
 5f2a276ee7b8decec541391229d03591  ./missing
 0f964781cbaa780a96508334ec965d1e  ./GpuTempMeter.c
-cfa5bf391ef03b73c8b6cba95e5e2484  ./CRT.c
+89d999dd673583b9160f5fcc2d1a51eb  ./CRT.c
 75557092070931bcb0fb9a6d74575542  ./AUTHORS
 e9bcdbd34fd14cabab19afab78f74331  ./Header.c
 201c6afab5fa4768179752a2e54cd5f9  ./freebsd/FreeBSDProcessList.c
@@ -46,11 +46,11 @@ c75ba2d075c6c645c1d47d3faf3d0e37  ./freebsd/Battery.c
 b8b785dc399c3d42bb801aa847702137  ./Armbian_Meter.c
 9c68ec4a541fad5c870b2828cdff60a9  ./htop.1.in
 c919cecba6514a688673a615a0571bf3  ./RichString.c
-ce88be594784a74b0b679f2ec6f89555  ./AvailableMetersPanel.c
+67044f9960bfb14ef43637952bd83d93  ./AvailableMetersPanel.c
 d898885fd76c7c72374b14b4dff04b31  ./aclocal.m4
 b3c75a8fadbc33e2dcf16d8107750690  ./configure
 8c52c8fc3035d2eb7e4d4e18cb8c6a45  ./ProcessList.c
-019b7544892f6e94394607cc8f06d0ae  ./CpuFreqMeter.c
+4472aae74aa50a5cd785395d0d24e7d5  ./CpuFreqMeter.c
 f311ed64d1aa03660119b1f8e0e7a1d0  ./Makefile.in
 3875880c407014445c8bf89670882b79  ./EnvScreen.c
 8960f64ca5b34bf42e0e48124b7d2c4a  ./UptimeMeter.c
@@ -110,7 +110,7 @@ e31dcc80388c0ec180ff3a173953d709  ./ChangeLog
 c9671feb88339208a8c34c54ac7a6eef  ./config.guess
 b6c6677af416877c255405f6072b3d60  ./IncSet.c
 b5c7fa0ad40418e748cb6da3f1e4c000  ./linux/LinuxCRT.c
-42ed3db65e756694a14ca015a45f9afb  ./linux/Platform.c
+7a6eb326dcbded5bb43e9d5ed14dda36  ./linux/Platform.c
 75d57eb5267f00310c0fa648722e17cc  ./linux/IOPriority.c
 9021dd3f1834eaa22c3ff03ca588e3d6  ./linux/Battery.c
 a4b6d833d2bb56178cf1bae4ab793e07  ./linux/LinuxProcess.c

@@ -141,6 +141,7 @@ typedef enum ColorElements_ {
    OS_VERSION,
    ARMBIAN_VERSION,
    CORE_TEMP,
+   CORE_FREQ,
    LAST_COLORELEMENT
 } ColorElements;
 
@@ -257,7 +258,8 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [DISTRO_VERSION] = A_BOLD | ColorPair(Cyan,Black),
       [OS_VERSION] = A_BOLD | ColorPair(Cyan,Black),
       [ARMBIAN_VERSION] = A_BOLD | ColorPair(Cyan,Black),
-      [CORE_TEMP] = A_BOLD | ColorPair(Cyan,Black),
+      [CORE_TEMP] = A_BOLD | ColorPair(Red,Black),
+      [CORE_FREQ] = A_BOLD | ColorPair(Yellow,Black),
    },
    [COLORSCHEME_MONOCHROME] = {
       [RESET_COLOR] = A_NORMAL,
@@ -330,6 +332,7 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [OS_VERSION] = A_BOLD,
       [ARMBIAN_VERSION] = A_BOLD,      
       [CORE_TEMP] = A_BOLD,
+      [CORE_FREQ] = A_BOLD,
    },
    [COLORSCHEME_BLACKONWHITE] = {
       [RESET_COLOR] = ColorPair(Black,White),
@@ -402,6 +405,7 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [OS_VERSION] = A_BOLD | ColorPair(Yellow,White),
       [ARMBIAN_VERSION] = A_BOLD | ColorPair(Yellow,White),
       [CORE_TEMP] = A_BOLD | ColorPair(Yellow,White),
+      [CORE_FREQ] = A_BOLD | ColorPair(Yellow,Black),
    },
    [COLORSCHEME_LIGHTTERMINAL] = {
       [RESET_COLOR] = ColorPair(Black,Black),
@@ -474,6 +478,7 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [OS_VERSION] = A_BOLD | ColorPair(Yellow,Black),
       [ARMBIAN_VERSION] = A_BOLD | ColorPair(Yellow,Black),
       [CORE_TEMP] = A_BOLD | ColorPair(Yellow,Black),
+      [CORE_FREQ] = A_BOLD | ColorPair(Yellow,Black),
    },
    [COLORSCHEME_MIDNIGHT] = {
       [RESET_COLOR] = ColorPair(White,Blue),
@@ -546,6 +551,7 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [OS_VERSION] = A_BOLD | ColorPair(Cyan,Black),
       [ARMBIAN_VERSION] = A_BOLD | ColorPair(Cyan,Black),
       [CORE_TEMP] = A_BOLD | ColorPair(Cyan,Black),
+      [CORE_FREQ] = A_BOLD | ColorPair(Cyan,Black),
    },
    [COLORSCHEME_BLACKNIGHT] = {
       [RESET_COLOR] = ColorPair(Cyan,Black),
@@ -618,6 +624,7 @@ int CRT_colorSchemes[LAST_COLORSCHEME][LAST_COLORELEMENT] = {
       [OS_VERSION] = A_BOLD | ColorPair(Blue,Black),
       [ARMBIAN_VERSION] = A_BOLD | ColorPair(Blue,Black),
       [CORE_TEMP] = A_BOLD | ColorPair(Blue,Black),
+      [CORE_FREQ] = A_BOLD | ColorPair(Blue,Black),
    },
    [COLORSCHEME_BROKENGRAY] = { 0 } // dynamically generated.
 };

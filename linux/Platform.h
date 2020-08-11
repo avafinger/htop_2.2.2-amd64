@@ -57,6 +57,8 @@ int Platform_getCoreTemp(Meter* this, int cpu);
 
 int Platform_getCpuFreq(Meter* this, int cpu);
 
+int Platform_getCoreFreq(Meter* this, int cpu);
+
 int Platform_getCpuVcore();
 
 int Platform_getCpuVcore_l(Meter* this);

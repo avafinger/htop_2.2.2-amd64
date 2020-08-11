@@ -65,8 +65,11 @@ static void CpuFreqMeter_setValues(Meter* this, char* buffer, int len) {
        } else {
            xSnprintf(buf_l, ln, "%4d MHz", Freq);
        }
-       
-       xSnprintf(buffer, len, "%s %s (%d)", buf_b, buf_l, pulse);
+
+       if (pulse)
+          xSnprintf(buffer, len, "%s %s (big.LITTLE)", buf_b, buf_l, pulse);
+       else
+          xSnprintf(buffer, len, "%s %s             ", buf_b, buf_l, pulse);
        pulse = !pulse;
        return;
    }
@@ -104,3 +107,58 @@ MeterClass CpuFreqMeter_class = {
    .caption = "Cpu Freq: ",
 };
 
+int CoreFreqMeter_attributes[] = {
+   CORE_FREQ
+};
+
+static void CoreFreqMeter_setValues(Meter* this, char* buffer, int len) {
+   int ghz, mhz, roundup;
+   int Freq;
+   int cpu = this->param;
+   if (cpu > this->pl->cpuCount) {
+      xSnprintf(buffer, len, "absent");
+      return;
+   }
+    Freq = Platform_getCoreFreq(this, cpu - 1);
+    if (Freq > 1000) {
+       Freq /= 1000;
+    }
+    if (Freq > 1000) {
+       ghz = Freq / 1000;
+       mhz = Freq % 1000;
+       roundup = ((mhz % 10) > 5);
+       mhz /= 10;
+       if (mhz < 99)
+          mhz += roundup;
+       xSnprintf(buffer, len, "%d.%02d GHz", ghz, mhz);
+    } else {
+       xSnprintf(buffer, len, "%4d MHz", Freq);
+    }
+}
+
+static void CoreFreqMeter_init(Meter* this) {
+   int cpu = this->param;
+   if (this->pl->cpuCount > 1) {
+      char caption[20];
+      xSnprintf(caption, sizeof(caption), "CPU%d Freq: ", cpu);
+      Meter_setCaption(this, caption);
+   }
+   if (this->param == 0)
+      Meter_setCaption(this, "Avg");
+}   
+
+MeterClass CoreFreqMeter_class = {
+   .super = {
+      .extends = Class(Meter),
+      .delete = Meter_delete
+   },
+   .updateValues = CoreFreqMeter_setValues, 
+   .defaultMode = TEXT_METERMODE,
+   .maxItems = 1,
+   .total = 100.0,
+   .attributes = CoreFreqMeter_attributes,
+   .name = "CoreFreq",
+   .uiName = "CoreFreq",
+   .caption = "CoreFreq",
+   .init = CoreFreqMeter_init
+};

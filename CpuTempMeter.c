@@ -59,7 +59,7 @@ static void CoreTempMeter_init(Meter* this) {
    int cpu = this->param;
    if (this->pl->cpuCount > 1) {
       char caption[20];
-      xSnprintf(caption, sizeof(caption), "Core%d Tp: ", cpu);
+      xSnprintf(caption, sizeof(caption), "CPU%d Temp: ", cpu);
       Meter_setCaption(this, caption);
    }
    if (this->param == 0)

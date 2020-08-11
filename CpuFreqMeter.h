@@ -13,5 +13,8 @@ extern int CpuFreqMeter_attributes[];
 
 extern MeterClass CpuFreqMeter_class;
 
+extern int CoreFreqMeter_attributes[];
+
+extern MeterClass CoreFreqMeter_class;
 
 #endif
