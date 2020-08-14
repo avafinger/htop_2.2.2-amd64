@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <unistd.h>
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
@@ -108,6 +109,57 @@ int ReadTokenValue( char *fname, char *key, char *value) {
             *str_end = 0;
             strcpy(value, str);
             fd = 1;
+        }
+    }
+    fclose(fp);
+    return fd;
+}
+
+char *ltrim(char *str) {
+    while(isspace(*str))
+        str++;
+    return str;
+}
+
+char *rtrim(char *str) {
+    char* end = str + strlen(str);
+    while (isspace(*--end))
+        ;
+    *(end + 1) = '\0';
+    return str;
+}
+
+char *trim(char *str) {
+    return rtrim(ltrim(str)); 
+}
+
+int FindDataValueFromKey( char *fname, char *key, char *value) {
+    FILE* fp;
+    char buffer[BLEN];
+    int fd = 0;
+    int len = strlen(key);
+    char *str;
+    char *str_end;
+    char *str_start;
+    
+    fp = fopen(fname, "r");
+    if (fp == NULL)
+        return fd;
+
+    while (fgets(buffer, BLEN, fp) != NULL) {
+        str_start = buffer;
+        str_end = strstr(buffer, ":");
+        if (str_end != NULL) {
+            *str_end = 0;
+            str_start = trim(str_start);
+            if (strcasecmp(str_start, key) == 0) {
+                str = str_end + 1;
+                str = trim(str);
+                strcpy(value, str);
+                printf("key: %s, value: %s\n", str_start, str);
+                fd = 1;
+                break;
+            }
         }
     }
     fclose(fp);

@@ -27,16 +27,37 @@ in the source distribution for its full text.
 #else
 #include <unistd.h> 
 #endif
-#include <string.h> 
+#include <string.h>
+
+
+typedef enum vendor_id_ {
+   VENDOR_INTEL,
+   VENDOR_AMD,
+   VENDOR_CYRIX,
+   VENDOR_VIA,
+   VENDOR_TRANSMETA,
+   VENDOR_UMC,
+   VENDOR_NEXGEN,
+   VENDOR_RISE,
+   VENDOR_SIS,
+   VENDOR_NSC,
+   VENDOR_VORTEX,
+   VENDOR_RDC,
+   VENDOR_UNKNOWN 
+} vendor_id;
+
 
 #ifndef CLAMP
 #define CLAMP(x,low,high) (((x)>(high))?(high):(((x)<(low))?(low):(x)))
 #endif
 
+extern char *Platform_Vendor_CPU[];
+
 extern ProcessField Platform_defaultFields[];
 
 int Platform_cpuBigLITTLE;
 extern int Platform_numberOfFields;
+extern vendor_id Platform_CPU_vendor_id;
 
 extern const SignalItem Platform_signals[];
 
@@ -82,5 +103,7 @@ void Platform_setMemoryValues(Meter* this);
 void Platform_setSwapValues(Meter* this);
 
 char* Platform_getProcessEnv(pid_t pid);
+
+vendor_id Platform_getCPU_vendor_id(void);
 
 #endif

@@ -5,9 +5,9 @@ Version: 2.2.2-2
 Auto-Built-Package: debug-symbols
 Architecture: amd64
 Maintainer: Daniel Lange <DLange@debian.org>
-Installed-Size: 338
+Installed-Size: 342
 Depends: htop (= 2.2.2-2)
 Section: debug
 Priority: optional
 Description: debug symbols for htop
-Build-Ids: 212b9ff00b76c53147e40f1ca6d005de066e5560
+Build-Ids: abfab008c9d685503addb91960b7f8b059f9f5c1

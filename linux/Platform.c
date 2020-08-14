@@ -35,6 +35,7 @@ in the source distribution for its full text.
 #include "HostnameMeter.h"
 #include "LinuxProcess.h"
 #include "Settings.h"
+#include "interfaces.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -63,12 +64,33 @@ in the source distribution for its full text.
 #else
 #include <unistd.h> 
 #endif
-#include <string.h> 
+#include <string.h>
+
+
+typedef enum vendor_id_ {
+   VENDOR_INTEL,
+   VENDOR_AMD,
+   VENDOR_CYRIX,
+   VENDOR_VIA,
+   VENDOR_TRANSMETA,
+   VENDOR_UMC,
+   VENDOR_NEXGEN,
+   VENDOR_RISE,
+   VENDOR_SIS,
+   VENDOR_NSC,
+   VENDOR_VORTEX,
+   VENDOR_RDC,
+   VENDOR_UNKNOWN 
+} vendor_id;
+
 }*/
 
 #ifndef CLAMP
 #define CLAMP(x,low,high) (((x)>(high))?(high):(((x)<(low))?(low):(x)))
 #endif
+
+
+char *Platform_Vendor_CPU[] = { "GenuineIntel", "AuthenticAMD", "CyrixInstead", "CentaurHauls", "UMC UMC UMC", "NexGenDriven", "RiseRiseRise", "GenuineTMx86", "SiS SiS SiS", "Geode by NSC", "Vortex86 SoC","Genuine  RDC", NULL };
 
 ProcessField Platform_defaultFields[] = { PID, USER, PRIORITY, NICE, M_SIZE, M_RESIDENT, M_SHARE, STATE, PERCENT_CPU, PERCENT_MEM, TIME, COMM, 0 };
 
@@ -76,6 +98,7 @@ ProcessField Platform_defaultFields[] = { PID, USER, PRIORITY, NICE, M_SIZE, M_R
 
 int Platform_cpuBigLITTLE;
 int Platform_numberOfFields = LAST_PROCESSFIELD;
+vendor_id Platform_CPU_vendor_id = VENDOR_UNKNOWN;
 
 const SignalItem Platform_signals[] = {
    { .name = " 0 Cancel",    .number = 0 },
@@ -270,7 +293,15 @@ int Platform_getCoreTemp(Meter* this, int cpu) {
        }
    } else {
       // sleep_ms(30);
-      xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp%d_input", cpu);
+      if (Platform_CPU_vendor_id == VENDOR_INTEL) {
+          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp%d_input", cpu);
+      } else if (Platform_CPU_vendor_id == VENDOR_AMD) {
+          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp1_input", cpu);
+      } else if (Platform_CPU_vendor_id == VENDOR_VIA) {
+          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon0/device/temp1_input", cpu);
+      } else {
+          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp1_input", cpu);
+      }
    }
    FILE *fd = fopen(szbuf, "r");
    if (fd) {
@@ -570,4 +601,22 @@ char* Platform_getProcessEnv(pid_t pid) {
       }
    }
    return env;
+}
+
+vendor_id Platform_getCPU_vendor_id(void) {
+  char Vendor[68];
+  int rc;
+  int i;
+   
+  rc = FindDataValueFromKey( "/proc/cpuinfo", "vendor_id", Vendor);
+  if (!rc) {
+      return VENDOR_UNKNOWN;
+  }
+  rc = 0;
+  while (Platform_Vendor_CPU[rc] != NULL) {
+      if (strcmp(Platform_Vendor_CPU[rc], Vendor) == 0)
+          break;
+      rc++;
+  }
+  return rc;
 }

@@ -171,7 +171,7 @@ static void millisleep(unsigned long millisec) {
 }
 
 int main(int argc, char** argv) {
-
+   char vendor[48];
    char *lc_ctype = getenv("LC_CTYPE");
    if(lc_ctype != NULL)
       setlocale(LC_CTYPE, lc_ctype);
@@ -195,6 +195,8 @@ int main(int argc, char** argv) {
    ProcessList* pl = ProcessList_new(ut, flags.pidWhiteList, flags.userId);
    
    Platform_findCpuBigLITTLE(pl->cpuCount, &pl->cpuBigLITTLE);
+   Platform_getCPU_vendor_id();
+   
 
    Settings* settings = Settings_new(pl->cpuCount);
    pl->settings = settings;
