@@ -222,12 +222,12 @@ int Platform_getGpuTemp(Meter* this) {
    if (handler[0] != 0) {
        cpu_core_policy = strchr(handler, '%');
        if (cpu_core_policy) {
-           strcpy(szbuf, "/sys/class/thermal/thermal_zone1/temp");
+           xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone1/temp");
        } else {
-           strcpy(szbuf, handler);
+           xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
-       strcpy(szbuf, "/sys/class/thermal/thermal_zone1/temp");
+       xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone1/temp");
    }
    
    FILE* fd = fopen(szbuf, "r");
@@ -254,14 +254,14 @@ int Platform_getCpuTemp(Meter* this) {
    if (handler[0] != 0) {
        cpu_core_policy = strchr(handler, '%');
        if (cpu_core_policy) {
-           strcpy(szbuf, "/sys/class/thermal/thermal_zone0/temp");
+           xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
        } else {
-           strcpy(szbuf, handler);
+           xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
       // sleep_ms(30);
       // xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpufreq/policy%d/cpuinfo_cur_freq", cpu);
-      strcpy(szbuf, "/sys/class/thermal/thermal_zone0/temp");
+      xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
    }
    FILE *fd = fopen(szbuf, "r");
    if (!fd) {
@@ -289,18 +289,18 @@ int Platform_getCoreTemp(Meter* this, int cpu) {
            // strcpy(szbuf, "/sys/class/thermal/thermal_zone0/temp");
            xSnprintf(szbuf, sizeof(szbuf), handler, cpu);
        } else {
-           strcpy(szbuf, handler);
+           xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
       // sleep_ms(30);
       if (Platform_CPU_vendor_id == VENDOR_INTEL) {
           xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp%d_input", cpu);
       } else if (Platform_CPU_vendor_id == VENDOR_AMD) {
-          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp1_input", cpu);
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
       } else if (Platform_CPU_vendor_id == VENDOR_VIA) {
-          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon0/device/temp1_input", cpu);
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon0/device/temp1_input");
       } else {
-          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp1_input", cpu);
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
       }
    }
    FILE *fd = fopen(szbuf, "r");

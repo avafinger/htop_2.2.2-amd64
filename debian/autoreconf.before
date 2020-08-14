@@ -1,4 +1,5 @@
 458caed16bb8c605b6fdfdea2c511431  ./ListItem.c
+b94e4f728748e70625d96c0df7b5de04  ./htop-core-monitor-freq-temp.png
 07ee7449ac9e86ffd5696c60da71f1ba  ./ClockMeter.c
 31eafd0eec5031317ea950825dc08805  ./CpuVcoreMeter.c
 118263b2ab2ea92c851bea1557388dd8  ./AvailableColumnsPanel.c
@@ -103,14 +104,14 @@ c625d811f9e0033b64be37391943fd3a  ./Settings.c
 36438e04934e94041859929a89364b68  ./Process.c
 72293fc8ff20a1aa65eca500f5c48479  ./htop.desktop
 ade6d09f3053d98a7a60371a6ddbed01  ./UsersTable.c
-c00ceabadfd7445796ca5d24f1f9f244  ./README.md
+8b708012a0e0c260ce10567f811bfc49  ./README.md
 c1744a2799fe063106b88ac8ee8a50f4  ./NEWS
 e31dcc80388c0ec180ff3a173953d709  ./ChangeLog
 500b9244caa7a7ab23ece1db37efa76d  ./compile
 c9671feb88339208a8c34c54ac7a6eef  ./config.guess
 b6c6677af416877c255405f6072b3d60  ./IncSet.c
 b5c7fa0ad40418e748cb6da3f1e4c000  ./linux/LinuxCRT.c
-e0786ddae496462564ab2a5943bd42c0  ./linux/Platform.c
+6d847c7947cdd85a32182413d68d416f  ./linux/Platform.c
 75d57eb5267f00310c0fa648722e17cc  ./linux/IOPriority.c
 9021dd3f1834eaa22c3ff03ca588e3d6  ./linux/Battery.c
 a4b6d833d2bb56178cf1bae4ab793e07  ./linux/LinuxProcess.c

@@ -10,4 +10,4 @@ Depends: htop (= 2.2.2-2)
 Section: debug
 Priority: optional
 Description: debug symbols for htop
-Build-Ids: abfab008c9d685503addb91960b7f8b059f9f5c1
+Build-Ids: bb60c51c57cdec1cc8ae8920f6ad01557063997b
