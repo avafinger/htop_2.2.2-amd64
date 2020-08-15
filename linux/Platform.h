@@ -72,8 +72,36 @@ void sleep_ms(int milliseconds);
 
 int Platform_getGpuTemp(Meter* this);
 
+/*
+ * INTEL tempX_input
+ * where X is core_id + 1 despite the docs say otherwise:
+ * 
+ * All Sysfs entries are named with their core_id (represented here by 'X').
+ * tempX_input	 - Core temperature (in millidegrees Celsius).
+ * tempX_max	 - All cooling devices should be turned on (on Core2).
+ * tempX_crit	 - Maximum junction temperature (in millidegrees Celsius).
+ * tempX_crit_alarm - Set when Out-of-spec bit is set, never clears.
+ * 		   Correct CPU operation is no longer guaranteed.
+ * tempX_label	 - Contains string "Core X", where X is processor
+ * 		   number. For Package temp, this will be "Physical id Y",
+ * 		   where Y is the package number.
+ */ 
 int Platform_getCpuTemp(Meter* this);
 
+/*
+ * INTEL tempX_input
+ * where X is core_id + 1 despite the docs say otherwise:
+ * 
+ * All Sysfs entries are named with their core_id (represented here by 'X').
+ * tempX_input	 - Core temperature (in millidegrees Celsius).
+ * tempX_max	 - All cooling devices should be turned on (on Core2).
+ * tempX_crit	 - Maximum junction temperature (in millidegrees Celsius).
+ * tempX_crit_alarm - Set when Out-of-spec bit is set, never clears.
+ * 		   Correct CPU operation is no longer guaranteed.
+ * tempX_label	 - Contains string "Core X", where X is processor
+ * 		   number. For Package temp, this will be "Physical id Y",
+ * 		   where Y is the package number.
+ */ 
 int Platform_getCoreTemp(Meter* this, int cpu);
 
 int Platform_getCpuFreq(Meter* this, int cpu);

@@ -22,7 +22,7 @@ f2766448e74c24bd1c1c5d12466093ae  ./INSTALL
 c089b21c92e511e202583262d04c6ceb  ./amd64.png
 456d97d34b7d4dd56771015a4ac9d546  ./Eth1_Meter.c
 c312653532e8e669f30e5ec8bdc23be3  ./COPYING
-9806900363be70c3e77b9a56901d7834  ./htop.c
+e86b9e098470a02159f809cd470181ca  ./htop.c
 c82d96a969534cc5fb6038d812e23b04  ./TasksMeter.c
 64559008b786713995cc3b5e687fa75a  ./Affinity.c
 e62116fb2899576bb2cd54a28af0e486  ./dragonflybsd/Platform.c
@@ -33,7 +33,7 @@ fad2e99f73fc97862bc25e0dc99f3d4c  ./dragonflybsd/DragonFlyBSDProcess.c
 c3ed7d655bd5906d23a25cf1a37f1f56  ./SwapMeter.c
 f5e45c8dc14ad5070c262f802ff7cdb8  ./autom4te.cache/output.0
 0f1f25c7c161d84b0bc100ebd4eb2923  ./autom4te.cache/traces.1
-5d0b9fd7d93badfc34453cf4ffd1de49  ./autom4te.cache/requests
+48a5fdfc6145fb38591cab14cc303b74  ./autom4te.cache/requests
 70c0b517b7164f02caffa3d4c1cf6f3a  ./autom4te.cache/traces.0
 f5e45c8dc14ad5070c262f802ff7cdb8  ./autom4te.cache/output.1
 5f2a276ee7b8decec541391229d03591  ./missing
@@ -117,7 +117,7 @@ e31dcc80388c0ec180ff3a173953d709  ./ChangeLog
 c9671feb88339208a8c34c54ac7a6eef  ./config.guess
 b6c6677af416877c255405f6072b3d60  ./IncSet.c
 b5c7fa0ad40418e748cb6da3f1e4c000  ./linux/LinuxCRT.c
-6d847c7947cdd85a32182413d68d416f  ./linux/Platform.c
+5cf2ccf8ac723de76284cb8128167113  ./linux/Platform.c
 75d57eb5267f00310c0fa648722e17cc  ./linux/IOPriority.c
 9021dd3f1834eaa22c3ff03ca588e3d6  ./linux/Battery.c
 a4b6d833d2bb56178cf1bae4ab793e07  ./linux/LinuxProcess.c

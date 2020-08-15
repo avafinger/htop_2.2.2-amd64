@@ -242,7 +242,20 @@ int Platform_getGpuTemp(Meter* this) {
    return Temp;
 }
 
-
+/*
+ * INTEL tempX_input
+ * where X is core_id + 1 despite the docs say otherwise:
+ * 
+ * All Sysfs entries are named with their core_id (represented here by 'X').
+ * tempX_input	 - Core temperature (in millidegrees Celsius).
+ * tempX_max	 - All cooling devices should be turned on (on Core2).
+ * tempX_crit	 - Maximum junction temperature (in millidegrees Celsius).
+ * tempX_crit_alarm - Set when Out-of-spec bit is set, never clears.
+ * 		   Correct CPU operation is no longer guaranteed.
+ * tempX_label	 - Contains string "Core X", where X is processor
+ * 		   number. For Package temp, this will be "Physical id Y",
+ * 		   where Y is the package number.
+ */ 
 int Platform_getCpuTemp(Meter* this) {
    int Temp = 0;
    char szbuf[256];
@@ -254,14 +267,31 @@ int Platform_getCpuTemp(Meter* this) {
    if (handler[0] != 0) {
        cpu_core_policy = strchr(handler, '%');
        if (cpu_core_policy) {
-           xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
+           if (Platform_CPU_vendor_id == VENDOR_INTEL) {
+              xSnprintf(szbuf, sizeof(szbuf), "%s",  "/sys/class/hwmon/hwmon1/temp2_input");
+          } else if (Platform_CPU_vendor_id == VENDOR_AMD) {
+              xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
+          } else if (Platform_CPU_vendor_id == VENDOR_VIA) {
+              xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon0/device/temp1_input");
+          } else {
+              xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
+          }
        } else {
            xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
       // sleep_ms(30);
       // xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpufreq/policy%d/cpuinfo_cur_freq", cpu);
-      xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
+      // xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
+      if (Platform_CPU_vendor_id == VENDOR_INTEL) {
+          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp2_input");
+      } else if (Platform_CPU_vendor_id == VENDOR_AMD) {
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
+      } else if (Platform_CPU_vendor_id == VENDOR_VIA) {
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon0/device/temp1_input");
+      } else {
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
+      }
    }
    FILE *fd = fopen(szbuf, "r");
    if (!fd) {
@@ -275,6 +305,20 @@ int Platform_getCpuTemp(Meter* this) {
    return Temp;
 }
 
+/*
+ * INTEL tempX_input
+ * where X is core_id + 1 despite the docs say otherwise:
+ * 
+ * All Sysfs entries are named with their core_id (represented here by 'X').
+ * tempX_input	 - Core temperature (in millidegrees Celsius).
+ * tempX_max	 - All cooling devices should be turned on (on Core2).
+ * tempX_crit	 - Maximum junction temperature (in millidegrees Celsius).
+ * tempX_crit_alarm - Set when Out-of-spec bit is set, never clears.
+ * 		   Correct CPU operation is no longer guaranteed.
+ * tempX_label	 - Contains string "Core X", where X is processor
+ * 		   number. For Package temp, this will be "Physical id Y",
+ * 		   where Y is the package number.
+ */ 
 int Platform_getCoreTemp(Meter* this, int cpu) {
    int Temp = 0;
    char szbuf[256];
