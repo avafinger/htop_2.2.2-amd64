@@ -19,6 +19,7 @@ in the source distribution for its full text.
 #include "CpuTempMeter.h"
 #include "GpuTempMeter.h"
 #include "CpuVcoreMeter.h"
+#include "Eth0_StatsMeter.h"
 #include "Eth0_Meter.h"
 #include "Eth1_Meter.h"
 #include "Wlan0_Meter.h"
@@ -83,12 +84,23 @@ typedef enum vendor_id_ {
    VENDOR_UNKNOWN 
 } vendor_id;
 
+typedef struct Stats_ {
+    int rx_over;
+    int tx_over;
+    double rx_bytes;
+    double tx_bytes;
+    double rx_bytes_comp;
+    double tx_bytes_comp;
+    unsigned long connect_time;
+    unsigned long current_time;
+} Stats;
+
+
 }*/
 
 #ifndef CLAMP
 #define CLAMP(x,low,high) (((x)>(high))?(high):(((x)<(low))?(low):(x)))
 #endif
-
 
 char *Platform_Vendor_CPU[] = { "GenuineIntel", "AuthenticAMD", "CyrixInstead", "CentaurHauls", "UMC UMC UMC", "NexGenDriven", "RiseRiseRise", "GenuineTMx86", "SiS SiS SiS", "Geode by NSC", "Vortex86 SoC","Genuine  RDC", NULL };
 
@@ -96,7 +108,7 @@ ProcessField Platform_defaultFields[] = { PID, USER, PRIORITY, NICE, M_SIZE, M_R
 
 //static ProcessField defaultIoFields[] = { PID, IO_PRIORITY, USER, IO_READ_RATE, IO_WRITE_RATE, IO_RATE, COMM, 0 };
 
-int Platform_cpuBigLITTLE;
+int Platform_cpuBigLITTLE = 0;
 int Platform_numberOfFields = LAST_PROCESSFIELD;
 vendor_id Platform_CPU_vendor_id = VENDOR_UNKNOWN;
 
@@ -193,7 +205,8 @@ MeterClass* Platform_meterTypes[] = {
    &Kernelversion_Meter_class,
    &Armbianversion_Meter_class,
    &CoreTempMeter_class,
-   &CoreFreqMeter_class,   
+   &CoreFreqMeter_class,
+   &Eth0_StatsMeter_class,
    NULL
 };
 
@@ -650,7 +663,6 @@ char* Platform_getProcessEnv(pid_t pid) {
 vendor_id Platform_getCPU_vendor_id(void) {
   char Vendor[68];
   int rc;
-  int i;
    
   rc = FindDataValueFromKey( "/proc/cpuinfo", "vendor_id", Vendor);
   if (!rc) {
@@ -663,4 +675,66 @@ vendor_id Platform_getCPU_vendor_id(void) {
       rc++;
   }
   return rc;
+}
+
+Stats Platform_stats;
+
+int Platform_getEth_stats(char *devname, int close_fp) {
+    char buffer[BLEN];
+    char *str;
+    char *str_end;
+    char *str_start;
+    unsigned long dump;
+    int ifound;
+    unsigned long rx_o, tx_o;
+    static FILE *fp_proc_net_dev = NULL;
+    static r = 0;
+
+    if (close_fp) {
+        fclose(fp_proc_net_dev);
+        return 0;
+    }
+
+    if (fp_proc_net_dev == NULL) {
+        if ((fp_proc_net_dev = fopen("/proc/net/dev", "r")) == NULL) {
+            return -1;
+        }
+    }
+
+    /* save rx/tx values */
+    rx_o = Platform_stats.rx_bytes;
+    tx_o = Platform_stats.tx_bytes;
+
+    /* do not parse the first two lines as they only contain static garbage */
+    fseek(fp_proc_net_dev, 0, SEEK_SET);
+    fgets(buffer, BLEN, fp_proc_net_dev);
+    fgets(buffer, BLEN, fp_proc_net_dev);
+
+    ifound = 0;
+    while (fgets(buffer, BLEN, fp_proc_net_dev) != NULL) {
+        str_start = buffer;
+        str_end = strchr(buffer, ':');
+        if (str_end != NULL) {
+            *str_end = 0;
+            str_start = trim(str_start);
+            if (strcasecmp(str_start, devname) == 0) {
+                str = str_end + 1;
+                str = ltrim(str);
+                sscanf(str,
+                   "%lg %lu %lu %lu %lu %lu %lu %lu %lg %lu %lu %lu %lu %lu %lu %lu",
+                   &Platform_stats.rx_bytes, &dump, &dump,
+                   &dump, &dump, &dump, &dump, &dump, &Platform_stats.tx_bytes,
+                   &dump, &dump, &dump, &dump, &dump, &dump, &dump);
+                ifound = 1;
+                continue;
+            }
+        }
+    }
+    if (ifound) {
+        if (rx_o > Platform_stats.rx_bytes)
+            Platform_stats.rx_over++;
+        if (tx_o > Platform_stats.tx_bytes)
+            Platform_stats.tx_over++;
+    }
+    return ifound;
 }

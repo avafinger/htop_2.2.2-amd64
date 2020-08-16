@@ -142,6 +142,8 @@ typedef enum ColorElements_ {
    ARMBIAN_VERSION,
    CORE_TEMP,
    CORE_FREQ,
+   ETH0_STATS,
+   ETH1_STATS,
    LAST_COLORELEMENT
 } ColorElements;
 

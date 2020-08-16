@@ -46,6 +46,18 @@ typedef enum vendor_id_ {
    VENDOR_UNKNOWN 
 } vendor_id;
 
+typedef struct Stats_ {
+    int rx_over;
+    int tx_over;
+    double rx_bytes;
+    double tx_bytes;
+    double rx_bytes_comp;
+    double tx_bytes_comp;
+    unsigned long connect_time;
+    unsigned long current_time;
+} Stats;
+
+
 
 #ifndef CLAMP
 #define CLAMP(x,low,high) (((x)>(high))?(high):(((x)<(low))?(low):(x)))
@@ -55,7 +67,7 @@ extern char *Platform_Vendor_CPU[];
 
 extern ProcessField Platform_defaultFields[];
 
-int Platform_cpuBigLITTLE;
+extern int Platform_cpuBigLITTLE;
 extern int Platform_numberOfFields;
 extern vendor_id Platform_CPU_vendor_id;
 
@@ -133,5 +145,9 @@ void Platform_setSwapValues(Meter* this);
 char* Platform_getProcessEnv(pid_t pid);
 
 vendor_id Platform_getCPU_vendor_id(void);
+
+Stats Platform_stats;
+
+int Platform_getEth_stats(char *devname, int close_fp);
 
 #endif

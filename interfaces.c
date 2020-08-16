@@ -137,7 +137,6 @@ int FindDataValueFromKey( char *fname, char *key, char *value) {
     FILE* fp;
     char buffer[BLEN];
     int fd = 0;
-    int len = strlen(key);
     char *str;
     char *str_end;
     char *str_start;
@@ -148,7 +147,7 @@ int FindDataValueFromKey( char *fname, char *key, char *value) {
 
     while (fgets(buffer, BLEN, fp) != NULL) {
         str_start = buffer;
-        str_end = strstr(buffer, ":");
+        str_end = strchr(buffer, ':');
         if (str_end != NULL) {
             *str_end = 0;
             str_start = trim(str_start);

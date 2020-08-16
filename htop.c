@@ -247,7 +247,8 @@ int main(int argc, char** argv) {
    mvhline(LINES-1, 0, ' ', COLS);
    attroff(CRT_colors[RESET_COLOR]);
    refresh();
-   
+
+   Platform_getEth_stats("", 1);
    CRT_done();
    if (settings->changed)
       Settings_write(settings);
