@@ -1,9 +1,12 @@
 # htop_2.2.2-amd64
 
+* htop 2.2.2-2
+
 https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.1
 
 ![F2 config](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/amd64.png)
 
+* htop 2.2.2-2 (fix)
 
 https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.2
 
@@ -11,6 +14,13 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.2
 
 
 ![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0_stats.png)
+
+
+https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.3
+
+* htop 2.2.2-3 (Eth speed)
+
+![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0-stat-speed.png)
 
 
 ## handlers
