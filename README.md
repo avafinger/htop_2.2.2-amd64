@@ -20,7 +20,7 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.3
 
 * htop 2.2.2-3 (Eth speed)
 
-![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0-stat-speed.png)
+![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth-stat-speed.png)
 
 
 ## handlers
