@@ -146,8 +146,11 @@ char* Platform_getProcessEnv(pid_t pid);
 
 vendor_id Platform_getCPU_vendor_id(void);
 
-Stats Platform_stats;
+Stats Platform_Eth0_stats;
+Stats Platform_Eth1_stats;
 
-int Platform_getEth_stats(char *devname, int close_fp);
+int Platform_getEth_stats(char *devname, int id, int close_fp);
+
+double get_wall_time(void);
 
 #endif

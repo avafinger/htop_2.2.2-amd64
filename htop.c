@@ -248,7 +248,7 @@ int main(int argc, char** argv) {
    attroff(CRT_colors[RESET_COLOR]);
    refresh();
 
-   Platform_getEth_stats("", 1);
+   Platform_getEth_stats("", -1, 1);
    CRT_done();
    if (settings->changed)
       Settings_write(settings);

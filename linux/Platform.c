@@ -20,6 +20,7 @@ in the source distribution for its full text.
 #include "GpuTempMeter.h"
 #include "CpuVcoreMeter.h"
 #include "Eth0_StatsMeter.h"
+#include "Eth1_StatsMeter.h"
 #include "Eth0_Meter.h"
 #include "Eth1_Meter.h"
 #include "Wlan0_Meter.h"
@@ -51,6 +52,7 @@ in the source distribution for its full text.
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 /*{
 #include "Action.h"
@@ -207,6 +209,7 @@ MeterClass* Platform_meterTypes[] = {
    &CoreTempMeter_class,
    &CoreFreqMeter_class,
    &Eth0_StatsMeter_class,
+   &Eth1_StatsMeter_class,   
    NULL
 };
 
@@ -677,9 +680,10 @@ vendor_id Platform_getCPU_vendor_id(void) {
   return rc;
 }
 
-Stats Platform_stats;
+Stats Platform_Eth0_stats;
+Stats Platform_Eth1_stats;
 
-int Platform_getEth_stats(char *devname, int close_fp) {
+int Platform_getEth_stats(char *devname, int id, int close_fp) {
     char buffer[BLEN];
     char *str;
     char *str_end;
@@ -687,8 +691,8 @@ int Platform_getEth_stats(char *devname, int close_fp) {
     unsigned long dump;
     int ifound;
     unsigned long rx_o, tx_o;
+    Stats *Platform_Eth_stats;
     static FILE *fp_proc_net_dev = NULL;
-    static r = 0;
 
     if (close_fp) {
         fclose(fp_proc_net_dev);
@@ -700,10 +704,15 @@ int Platform_getEth_stats(char *devname, int close_fp) {
             return -1;
         }
     }
+    if (id == 0) {
+        Platform_Eth_stats = &Platform_Eth0_stats;
+    } else {
+        Platform_Eth_stats = &Platform_Eth1_stats;
+    }
 
     /* save rx/tx values */
-    rx_o = Platform_stats.rx_bytes;
-    tx_o = Platform_stats.tx_bytes;
+    rx_o = Platform_Eth_stats->rx_bytes;
+    tx_o = Platform_Eth_stats->tx_bytes;
 
     /* do not parse the first two lines as they only contain static garbage */
     fseek(fp_proc_net_dev, 0, SEEK_SET);
@@ -722,8 +731,8 @@ int Platform_getEth_stats(char *devname, int close_fp) {
                 str = ltrim(str);
                 sscanf(str,
                    "%lg %lu %lu %lu %lu %lu %lu %lu %lg %lu %lu %lu %lu %lu %lu %lu",
-                   &Platform_stats.rx_bytes, &dump, &dump,
-                   &dump, &dump, &dump, &dump, &dump, &Platform_stats.tx_bytes,
+                   &Platform_Eth_stats->rx_bytes, &dump, &dump,
+                   &dump, &dump, &dump, &dump, &dump, &Platform_Eth_stats->tx_bytes,
                    &dump, &dump, &dump, &dump, &dump, &dump, &dump);
                 ifound = 1;
                 continue;
@@ -731,10 +740,17 @@ int Platform_getEth_stats(char *devname, int close_fp) {
         }
     }
     if (ifound) {
-        if (rx_o > Platform_stats.rx_bytes)
-            Platform_stats.rx_over++;
-        if (tx_o > Platform_stats.tx_bytes)
-            Platform_stats.tx_over++;
+        if (rx_o > Platform_Eth_stats->rx_bytes)
+            Platform_Eth_stats->rx_over++;
+        if (tx_o > Platform_Eth_stats->tx_bytes)
+            Platform_Eth_stats->tx_over++;
     }
     return ifound;
+}
+
+double get_wall_time(void) {
+    struct timeval time;
+    if (gettimeofday(&time, NULL))
+        return 0.;
+    return (double) time.tv_sec + (double) time.tv_usec * .000001;
 }
