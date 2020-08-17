@@ -22,9 +22,9 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.3
 
 ![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth-stat-speed.png)
 
-# Device Block speed stats
+# Block Device speed stats
 
-Add support for Device Block speed stats for the following:
+Add support for Block speed stats for the following:
 * sda
 * sdb
 * sdc
