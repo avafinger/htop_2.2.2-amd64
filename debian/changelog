@@ -1,6 +1,12 @@
+htop (2.2.2-4) unstable; urgency=medium
+
+  * Add Block Device speed stats
+
+ -- Alexander Finger <alex.mobigo@gmail.com>  Mon, 17 Aug 2020 16:15:15 -0300
+
 htop (2.2.2-3) unstable; urgency=medium
 
-  * Add Interface monitoring
+  * Add Interface speed stats
 
  -- Alexander Finger <alex.mobigo@gmail.com>  Sun, 16 Aug 2020 11:51:15 -0300
 

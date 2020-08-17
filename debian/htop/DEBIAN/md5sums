@@ -1,8 +1,8 @@
-16be7fc00e5b58af99487a2f294d3fac  usr/bin/htop
+6215b86e8f776db8f1d17f0cf4bcbba3  usr/bin/htop
 72293fc8ff20a1aa65eca500f5c48479  usr/share/applications/htop.desktop
 75557092070931bcb0fb9a6d74575542  usr/share/doc/htop/AUTHORS
 ac1c8490cf320346639da96c81d4ed12  usr/share/doc/htop/README
-604b0956bccaee03dfc3981a5175e269  usr/share/doc/htop/changelog.Debian.gz
+3c70d1c4e8554eb6a01427c236bfb93f  usr/share/doc/htop/changelog.Debian.gz
 e47828af9561417f6f624345ecbd28f4  usr/share/doc/htop/copyright
 8fb473f90cd314a6c2ca12e5f8a78b60  usr/share/man/man1/htop.1.gz
-b4f94bf7e197b659e93def714dded1fb  usr/share/pixmaps/htop.png
+255add50046a9ed33cfdd5429bfd379b  usr/share/pixmaps/htop.png

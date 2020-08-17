@@ -53,10 +53,16 @@ typedef struct Stats_ {
     double tx_bytes;
     double rx_bytes_comp;
     double tx_bytes_comp;
-    unsigned long connect_time;
-    unsigned long current_time;
 } Stats;
 
+typedef struct ioStats_ {
+    int read_over;
+    int write_over;
+    double read_sectors;
+    double write_sectors;
+    double read_sectors_comp;
+    double write_sectors_comp;
+} ioStats;
 
 
 #ifndef CLAMP
@@ -152,5 +158,19 @@ Stats Platform_Eth1_stats;
 int Platform_getEth_stats(char *devname, int id, int close_fp);
 
 double get_wall_time(void);
+
+ioStats Platform_BlockDevice_sda_stats;
+ioStats Platform_BlockDevice_sdb_stats;
+ioStats Platform_BlockDevice_sdc_stats;
+ioStats Platform_BlockDevice_sdd_stats;
+ioStats Platform_BlockDevice_mmcblk0_stats;
+ioStats Platform_BlockDevice_mmcblk1_stats;
+ioStats Platform_BlockDevice_mmcblk2_stats;
+ioStats Platform_BlockDevice_mmcblk3_stats;
+
+extern FILE *fp_block_dev_a[7];
+
+int Platform_getIO_stats(char *devname, int idx, int close_fp);
+
 
 #endif

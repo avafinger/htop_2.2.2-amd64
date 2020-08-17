@@ -21,6 +21,7 @@ in the source distribution for its full text.
 #include "CpuVcoreMeter.h"
 #include "Eth0_StatsMeter.h"
 #include "Eth1_StatsMeter.h"
+#include "BlockDevice_ioStatsMeter.h"
 #include "Eth0_Meter.h"
 #include "Eth1_Meter.h"
 #include "Wlan0_Meter.h"
@@ -93,10 +94,16 @@ typedef struct Stats_ {
     double tx_bytes;
     double rx_bytes_comp;
     double tx_bytes_comp;
-    unsigned long connect_time;
-    unsigned long current_time;
 } Stats;
 
+typedef struct ioStats_ {
+    int read_over;
+    int write_over;
+    double read_sectors;
+    double write_sectors;
+    double read_sectors_comp;
+    double write_sectors_comp;
+} ioStats;
 
 }*/
 
@@ -209,7 +216,15 @@ MeterClass* Platform_meterTypes[] = {
    &CoreTempMeter_class,
    &CoreFreqMeter_class,
    &Eth0_StatsMeter_class,
-   &Eth1_StatsMeter_class,   
+   &Eth1_StatsMeter_class,
+   &BlockDevice_sda_ioStatsMeter_class,
+   &BlockDevice_sdb_ioStatsMeter_class,
+   &BlockDevice_sdc_ioStatsMeter_class,
+   &BlockDevice_sdd_ioStatsMeter_class,
+   &BlockDevice_mmcblk0_ioStatsMeter_class,
+   &BlockDevice_mmcblk1_ioStatsMeter_class,
+   &BlockDevice_mmcblk2_ioStatsMeter_class,
+   &BlockDevice_mmcblk3_ioStatsMeter_class,  
    NULL
 };
 
@@ -300,7 +315,7 @@ int Platform_getCpuTemp(Meter* this) {
       // xSnprintf(szbuf, sizeof(szbuf), "/sys/devices/system/cpu/cpufreq/policy%d/cpuinfo_cur_freq", cpu);
       // xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/thermal/thermal_zone0/temp");
       if (Platform_CPU_vendor_id == VENDOR_INTEL) {
-          xSnprintf(szbuf, sizeof(szbuf), "/sys/class/hwmon/hwmon1/temp2_input");
+          xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp2_input");
       } else if (Platform_CPU_vendor_id == VENDOR_AMD) {
           xSnprintf(szbuf, sizeof(szbuf), "%s", "/sys/class/hwmon/hwmon1/temp1_input");
       } else if (Platform_CPU_vendor_id == VENDOR_VIA) {
@@ -387,7 +402,7 @@ int Platform_getCpuFreq(Meter* this, int cpu) {
        if (cpu_core_policy) {
            xSnprintf(szbuf, sizeof(szbuf), handler, cpu);
        } else {
-           strcpy(szbuf, handler);
+           xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
       // sleep_ms(30);
@@ -418,7 +433,7 @@ int Platform_getCoreFreq(Meter* this, int cpu) {
        if (cpu_core_policy) {
            xSnprintf(szbuf, sizeof(szbuf), handler, cpu);
        } else {
-           strcpy(szbuf, handler);
+           xSnprintf(szbuf, sizeof(szbuf), "%s", handler);
        }
    } else {
       // sleep_ms(30);
@@ -695,13 +710,14 @@ int Platform_getEth_stats(char *devname, int id, int close_fp) {
     static FILE *fp_proc_net_dev = NULL;
 
     if (close_fp) {
-        fclose(fp_proc_net_dev);
+        if (fp_proc_net_dev)
+            fclose(fp_proc_net_dev);
         return 0;
     }
 
     if (fp_proc_net_dev == NULL) {
         if ((fp_proc_net_dev = fopen("/proc/net/dev", "r")) == NULL) {
-            return -1;
+            return 0;
         }
     }
     if (id == 0) {
@@ -754,3 +770,96 @@ double get_wall_time(void) {
         return 0.;
     return (double) time.tv_sec + (double) time.tv_usec * .000001;
 }
+
+ioStats Platform_BlockDevice_sda_stats;
+ioStats Platform_BlockDevice_sdb_stats;
+ioStats Platform_BlockDevice_sdc_stats;
+ioStats Platform_BlockDevice_sdd_stats;
+ioStats Platform_BlockDevice_mmcblk0_stats;
+ioStats Platform_BlockDevice_mmcblk1_stats;
+ioStats Platform_BlockDevice_mmcblk2_stats;
+ioStats Platform_BlockDevice_mmcblk3_stats;
+
+FILE *fp_block_dev_a[7] = { NULL };
+
+int Platform_getIO_stats(char *devname, int idx, int close_fp) {
+    char block_device[80] = {0};
+    char buffer[BLEN] = {0};
+    unsigned long dump;
+    unsigned long read_o, write_o;
+    ioStats *Platform_io_stats;
+    FILE *fp_block_dev = NULL;
+
+    if (idx > 7)
+        idx = 0;
+
+    fp_block_dev = fp_block_dev_a[idx];
+
+    if (close_fp) {
+        if (fp_block_dev)
+            fclose(fp_block_dev);
+        return 0;
+    }
+
+    if (fp_block_dev == NULL) {
+        xSnprintf(block_device, sizeof(block_device), "/sys/block/%s/stat", devname);
+        if ((fp_block_dev = fopen(block_device, "r")) == NULL) {
+            return 0;
+        }
+        fp_block_dev_a[idx] = fp_block_dev;
+    }
+
+    switch(idx) {
+    case 0:
+        Platform_io_stats = &Platform_BlockDevice_sda_stats;
+        break;
+    case 1:
+        Platform_io_stats = &Platform_BlockDevice_sdb_stats;
+        break;
+    case 2:
+        Platform_io_stats = &Platform_BlockDevice_sdc_stats;
+        break;
+    case 3:
+        Platform_io_stats = &Platform_BlockDevice_sdd_stats;
+        break;
+    case 4:
+        Platform_io_stats = &Platform_BlockDevice_mmcblk0_stats;
+        break;
+    case 5:
+        Platform_io_stats = &Platform_BlockDevice_mmcblk1_stats;
+        break;
+    case 6:
+        Platform_io_stats = &Platform_BlockDevice_mmcblk2_stats;
+        break;
+    case 7:
+        Platform_io_stats = &Platform_BlockDevice_mmcblk3_stats;
+        break;
+    default:
+        Platform_io_stats = &Platform_BlockDevice_sda_stats;
+        break;
+    }
+    /* save read/write values */
+    read_o = Platform_io_stats->read_sectors;
+    write_o = Platform_io_stats->write_sectors;
+    fseek(fp_block_dev, 0, SEEK_SET);
+    if (fgets(buffer, BLEN - 1, fp_block_dev) != NULL) {
+       sscanf(buffer,
+       "%lu %lu %lg %lu %lu %lu %lg %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu",
+       &dump, &dump, &Platform_io_stats->read_sectors, &dump, &dump,
+       &dump, &Platform_io_stats->write_sectors, &dump, &dump, &dump, &dump,
+       &dump, &dump, &dump, &dump, &dump, &dump);
+    } else {
+      return 0;
+    }
+        
+    while (fgets(buffer, BLEN - 1, fp_block_dev) != NULL)
+        ;
+    
+    if (read_o > Platform_io_stats->read_sectors)
+        Platform_io_stats->read_over++;
+    if (write_o > Platform_io_stats->write_sectors)
+        Platform_io_stats->write_over++;
+    return 1;
+}
+
+

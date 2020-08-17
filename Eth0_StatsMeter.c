@@ -77,7 +77,7 @@ MeterClass Eth0_StatsMeter_class = {
    .attributes = Eth0_StatsMeter_attributes,
    .name = "Eth0stat",
    .uiName = "Eth0 stat",
-   .caption = " Eth0 stat: ",
+   .caption = "Eth0 stat: ",
 };
 
 
