@@ -60,14 +60,14 @@ static void BlockDevice_sda_ioStatsMeter_setValues(Meter* this, char* buffer, in
         readspeed = (Platform_BlockDevice_sda_stats.read_sectors - Platform_BlockDevice_sda_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_sda_stats.write_sectors - Platform_BlockDevice_sda_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -145,14 +145,14 @@ static void BlockDevice_sdb_ioStatsMeter_setValues(Meter* this, char* buffer, in
         readspeed = (Platform_BlockDevice_sdb_stats.read_sectors - Platform_BlockDevice_sdb_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_sdb_stats.write_sectors - Platform_BlockDevice_sdb_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -230,14 +230,14 @@ static void BlockDevice_sdc_ioStatsMeter_setValues(Meter* this, char* buffer, in
         readspeed = (Platform_BlockDevice_sdc_stats.read_sectors - Platform_BlockDevice_sdc_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_sdc_stats.write_sectors - Platform_BlockDevice_sdc_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -315,14 +315,14 @@ static void BlockDevice_sdd_ioStatsMeter_setValues(Meter* this, char* buffer, in
         readspeed = (Platform_BlockDevice_sdd_stats.read_sectors - Platform_BlockDevice_sdd_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_sdd_stats.write_sectors - Platform_BlockDevice_sdd_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -400,14 +400,14 @@ static void BlockDevice_mmcblk0_ioStatsMeter_setValues(Meter* this, char* buffer
         readspeed = (Platform_BlockDevice_mmcblk0_stats.read_sectors - Platform_BlockDevice_mmcblk0_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_mmcblk0_stats.write_sectors - Platform_BlockDevice_mmcblk0_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -485,14 +485,14 @@ static void BlockDevice_mmcblk1_ioStatsMeter_setValues(Meter* this, char* buffer
         readspeed = (Platform_BlockDevice_mmcblk1_stats.read_sectors - Platform_BlockDevice_mmcblk1_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_mmcblk1_stats.write_sectors - Platform_BlockDevice_mmcblk1_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -570,14 +570,14 @@ static void BlockDevice_mmcblk2_ioStatsMeter_setValues(Meter* this, char* buffer
         readspeed = (Platform_BlockDevice_mmcblk2_stats.read_sectors - Platform_BlockDevice_mmcblk2_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_mmcblk2_stats.write_sectors - Platform_BlockDevice_mmcblk2_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
@@ -655,14 +655,14 @@ static void BlockDevice_mmcblk3_ioStatsMeter_setValues(Meter* this, char* buffer
         readspeed = (Platform_BlockDevice_mmcblk3_stats.read_sectors - Platform_BlockDevice_mmcblk3_stats.read_sectors_comp) / refreshdelay;
         writespeed = (Platform_BlockDevice_mmcblk3_stats.write_sectors - Platform_BlockDevice_mmcblk3_stats.write_sectors_comp) / refreshdelay;
 
-        writespeed = writespeed * sec_size / 1024;
-        readspeed = readspeed * sec_size / 1024;
-        if (writespeed >= 1024 || readspeed >= 1024) {
-            writespeed /= 1024;
-            readspeed /= 1024;
-            if (writespeed >= 1024 || readspeed >= 1024) {
-                writespeed /= 1024;
-                readspeed /= 1024;
+        writespeed = writespeed * sec_size / 1000;
+        readspeed = readspeed * sec_size / 1000;
+        if (writespeed >= 1000 || readspeed >= 1000) {
+            writespeed /= 1000;
+            readspeed /= 1000;
+            if (writespeed >= 1000 || readspeed >= 1000) {
+                writespeed /= 1000;
+                readspeed /= 1000;
                 xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (R/W)",  (float) readspeed, (float) writespeed);
             } else {
                 xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (R/W)",  (float) readspeed, (float) writespeed);
