@@ -38,7 +38,7 @@ static void Eth1_StatsMeter_setValues(Meter* this, char* buffer, int len) {
     if (settings->eth1_alias[0] != 0) {
         ret = Platform_getEth_stats(settings->eth1_alias, 0, 0);
     } else {
-        ret = Platform_getEth_stats("eth1", 0, 0);
+        ret = Platform_getEth_stats("eth1", 1, 0);
     }
     
     if (ret) {

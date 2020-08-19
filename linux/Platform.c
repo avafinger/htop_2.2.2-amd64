@@ -780,7 +780,7 @@ ioStats Platform_BlockDevice_mmcblk1_stats;
 ioStats Platform_BlockDevice_mmcblk2_stats;
 ioStats Platform_BlockDevice_mmcblk3_stats;
 
-FILE *fp_block_dev_a[7] = { NULL };
+FILE *fp_block_dev_a[8] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
 int Platform_getIO_stats(char *devname, int idx, int close_fp) {
     char block_device[80] = {0};
