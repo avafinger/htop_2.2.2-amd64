@@ -122,7 +122,7 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
    // Platform_meterTypes[0] should be always (&CPUMeter_class), which we will
    // handle separately in the code below.
    for (i = 1; Platform_meterTypes[i]; i++) {
-      MeterClass* type = Platform_meterTypes[i];
+      type = Platform_meterTypes[i];
       assert(type != &CPUMeter_class);
       if (type == &CoreTempMeter_class)
           continue;
