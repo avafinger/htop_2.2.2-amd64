@@ -27,7 +27,6 @@ static void Eth0_StatsMeter_setValues(Meter* this, char* buffer, int len) {
     double refreshdelay;
     static double old = 0.;
     static double now = 0.;
-    static int flash = 0;
 
     now = get_wall_time();
     refreshdelay = now - old;
@@ -71,11 +70,7 @@ static void Eth0_StatsMeter_setValues(Meter* this, char* buffer, int len) {
         Platform_Eth0_stats.tx_bytes_comp = Platform_Eth0_stats.tx_bytes;
 
     } else {
-        if (!(flash % 2))
-            xSnprintf(buffer, len, "%s", "unavail");
-        else
-            xSnprintf(buffer, len, "%s", "");
-        flash++;
+        xSnprintf(buffer, len, "%s", "unavail");
     }
 }
 
