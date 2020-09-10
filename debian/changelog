@@ -1,3 +1,15 @@
+htop (2.2.2-6) unstable; urgency=medium
+
+  * Fix KB / MB / GB display res.
+
+ -- Alexander Finger <alex.mobigo@gmail.com>  Sun, 10 Sept 2020 12:00:00 -0300
+
+htop (2.2.2-5) unstable; urgency=medium
+
+  * Add Block Device speed stats
+
+ -- Alexander Finger <alex.mobigo@gmail.com>  sun, 30 Aug 2020 20:40:11 -0300
+
 htop (2.2.2-4) unstable; urgency=medium
 
   * Add Block Device speed stats
