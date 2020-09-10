@@ -36,7 +36,7 @@ static void Eth1_StatsMeter_setValues(Meter* this, char* buffer, int len) {
     old = now;    
 
     if (settings->eth1_alias[0] != 0) {
-        ret = Platform_getEth_stats(settings->eth1_alias, 0, 0);
+        ret = Platform_getEth_stats(settings->eth1_alias, 1, 0);
     } else {
         ret = Platform_getEth_stats("eth1", 1, 0);
     }
@@ -51,7 +51,21 @@ static void Eth1_StatsMeter_setValues(Meter* this, char* buffer, int len) {
         rxspeed = (Platform_Eth1_stats.rx_bytes - Platform_Eth1_stats.rx_bytes_comp) / refreshdelay;
         txspeed = (Platform_Eth1_stats.tx_bytes - Platform_Eth1_stats.tx_bytes_comp) / refreshdelay;
 
-        xSnprintf(buffer, len, "%.2f KB/s - %.2f KB/s (TX/RX)", (float) txspeed / 1024, (float) rxspeed / 1024);
+        txspeed = (float) txspeed / 1000.;
+        rxspeed = (float) rxspeed / 1000.;
+        if (rxspeed < 1000. && txspeed < 1000.) {
+            xSnprintf(buffer, len, "%.2f KB/s - %.2f KB/s (RX/TX)", (float) rxspeed, (float) txspeed);
+        } else {
+            txspeed = (float) txspeed / 1000.;
+            rxspeed = (float) rxspeed / 1000.;
+            if (txspeed < 1000. && rxspeed < 1000.) {
+                xSnprintf(buffer, len, "%.2f MB/s - %.2f MB/s (RX/TX)", (float) rxspeed, (float) txspeed);
+            } else {
+                txspeed = (float) txspeed / 1000.;
+                rxspeed = (float) rxspeed / 1000.;
+                xSnprintf(buffer, len, "%.2f GB/s - %.2f GB/s (RX/TX)", (float) rxspeed, (float) txspeed);
+            }
+        }
 
         Platform_Eth1_stats.rx_bytes_comp = Platform_Eth1_stats.rx_bytes;
         Platform_Eth1_stats.tx_bytes_comp = Platform_Eth1_stats.tx_bytes;
@@ -67,7 +81,7 @@ static void Eth1_StatsMeter_setValues(Meter* this, char* buffer, int len) {
 
 MeterClass Eth1_StatsMeter_class = {
    .super = {
-      .extends = Class(Meter),
+        .extends = Class(Meter),
       .delete = Meter_delete
    },
    .updateValues = Eth1_StatsMeter_setValues, 

@@ -868,5 +868,3 @@ int Platform_getIO_stats(char *devname, int idx, int close_fp) {
         Platform_io_stats->write_over++;
     return 1;
 }
-
-
