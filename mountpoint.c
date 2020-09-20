@@ -127,7 +127,7 @@ int fs_get_stat( int fs, char *out, int sz ) {
 
     *out = 0;
     
-	if (fs < 0 || fs > mountCount) {
+	if (fs < 0 || fs >= mountCount) {
 		return 0;
 	}
 	int ret = statvfs(aMountPoint[fs].subdir, &vfs);
@@ -137,11 +137,11 @@ int fs_get_stat( int fs, char *out, int sz ) {
         free = (double)(vfs.f_bfree * vfs.f_frsize) / KB;
         used = total - free;
 
-		if (total > KiB) {
+		if (total >= KiB) {
 			total = total / KB;
-			if (total > KiB) {
+			if (total >= KiB) {
 				total = total / KB;
-				if (total > KiB) {
+				if (total >= KiB) {
 					total = total / KB;
 					sprintf(buf1, "%.1fTB", total);
 				} else {
@@ -153,11 +153,11 @@ int fs_get_stat( int fs, char *out, int sz ) {
 		} else {
 			sprintf(buf1, "%.1fKB", total);
 		}
-        if (used > KiB) {
+        if (used >= KiB) {
 			used = used / KB;
-			if (used > KiB) {
+			if (used >= KiB) {
 				used = used / KB;
-				if (used > KiB) {
+				if (used >= KiB) {
 					used = used / KB;
 					sprintf(buf2, "%.1fTB", used);
 				} else {
@@ -169,11 +169,11 @@ int fs_get_stat( int fs, char *out, int sz ) {
 		} else {
 			sprintf(buf2, "%.1fKB", used);
 		}
-		if (available > KiB) {
+		if (available >= KiB) {
 			available = available / KB;
-			if (available > KiB) {
+			if (available >= KiB) {
 				available = available / KB;
-				if (available > KiB) {
+				if (available >= KiB) {
 					available = available / KB;
 					sprintf(buf3, "%.1fTB", available);
 				} else {
