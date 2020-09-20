@@ -39,6 +39,17 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.4
 ![sda stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/block_dev_stats.png)
 
 
+* htop 2.2.2-7 (fs and fix)
+
+Add support for **fs** stats on mount points subdir compatible with **df** info.
+Display Size  Used Avail Use% 
+
+Minor fix for CoreFreq and CoreTemp
+
+
+https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.7
+
+
 ## handlers
 
 Override default handlers for different kernel versions and configs.
