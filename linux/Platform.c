@@ -40,6 +40,8 @@ in the source distribution for its full text.
 #include "LinuxProcess.h"
 #include "Settings.h"
 #include "interfaces.h"
+#include "mountpoint.h"
+#include "fsUsage_Meter.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -217,6 +219,7 @@ MeterClass* Platform_meterTypes[] = {
    &Armbianversion_Meter_class,
    &CoreTempMeter_class,
    &CoreFreqMeter_class,
+   &fsUsage_Meter_class,
    &Eth0_StatsMeter_class,
    &Eth1_StatsMeter_class,
    &BlockDevice_sda_ioStatsMeter_class,

@@ -11,9 +11,11 @@ in the source distribution for its full text.
 #include "CPUMeter.h"
 #include "CpuFreqMeter.h"
 #include "CpuTempMeter.h"
+#include "fsUsage_Meter.h"
 #include "Header.h"
 #include "ListItem.h"
 #include "Platform.h"
+
 
 #include <assert.h>
 #include <stdlib.h>
@@ -105,7 +107,7 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
    int i;
    MeterClass* type;
    int cpus;
-   int key;
+   int key, fs;
     
    AvailableMetersPanel* this = AllocThis(AvailableMetersPanel);
    Panel* super = (Panel*) this;
@@ -128,6 +130,8 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
           continue;
       if (type == &CoreFreqMeter_class)
           continue;
+      if (type == &fsUsage_Meter_class)
+		  continue;
       const char* label = type->description ? type->description : type->uiName;
       key = i << 16;
       Panel_add(super, (Object*) ListItem_new(label, key));
@@ -139,10 +143,10 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
       for (i = 1; i <= cpus; i++) {
          char buffer[50];
          xSnprintf(buffer, 50, "%s %d", type->uiName, i);
-         Panel_add(super, (Object*) ListItem_new(buffer, i | (28 << 16)));
+         Panel_add(super, (Object*) ListItem_new(buffer, i | (29 << 16)));
       }
    } else {
-      Panel_add(super, (Object*) ListItem_new("CoreTemp", 1 | (28 << 16)));
+      Panel_add(super, (Object*) ListItem_new("CoreTemp", 1 | (29 << 16)));
    }
 
    type = &CoreFreqMeter_class;
@@ -152,10 +156,22 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
       for (i = 1; i <= cpus; i++) {
          char buffer[50];
          xSnprintf(buffer, 50, "%s %d", type->uiName, i);
-         Panel_add(super, (Object*) ListItem_new(buffer, i | (29 << 16)));
+         Panel_add(super, (Object*) ListItem_new(buffer, i | (30 << 16)));
       }
    } else {
-      Panel_add(super, (Object*) ListItem_new("CoreFreq", 1 | (29 << 16)));
+      Panel_add(super, (Object*) ListItem_new("CoreFreq", 1 | (30 << 16)));
+   }
+   
+   type = &fsUsage_Meter_class;
+   fs = pl->mountCount;
+   if (fs > 1) {
+      for (i = 1; i <= fs; i++) {
+         char buffer[80];
+         xSnprintf(buffer, 80, "%s %s", type->uiName, GetMountPointSubDirFromIndex( i - 1 ));
+         Panel_add(super, (Object*) ListItem_new(buffer, i | (31 << 16)));
+      }
+   } else {
+      Panel_add(super, (Object*) ListItem_new("fs", 1 | (31 << 16)));
    }
 
    // Handle (&CPUMeter_class)
@@ -171,5 +187,7 @@ AvailableMetersPanel* AvailableMetersPanel_new(Settings* settings, Header* heade
    } else {
       Panel_add(super, (Object*) ListItem_new("CPU", 1));
    }
+
+   
    return this;
 }
