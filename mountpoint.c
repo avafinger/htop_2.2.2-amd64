@@ -188,6 +188,6 @@ int fs_get_stat( int fs, char *out, int sz ) {
         perc = 100.0 * (double) (vfs.f_blocks - vfs.f_bfree) / (double) (vfs.f_blocks - vfs.f_bfree + vfs.f_bavail);
         sprintf(buf4, "%.1f%%", perc);
         xSnprintf(out, sz, "%s %s %s %s", buf1, buf2, buf3, buf4);
-        return 1;
     }
+    return ret;
 }

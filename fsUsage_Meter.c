@@ -3,6 +3,7 @@ htop - fsUsage_Meter.c
 (C) 2020 @lex
 */
 
+#include <errno.h>
 #include "fsUsage_Meter.h"
 #include "Platform.h"
 #include "CRT.h"
@@ -21,19 +22,20 @@ int fsUsage_Meter_attributes[] = {
 static void fsUsage_Meter_setValues(Meter* this, char* buffer, int len) {
     Settings* settings = this->pl->settings;
     int fs = this->param;
-    if (this->pl->mountCount > 1 && fs > 1 && fs <= this->pl->mountCount) {
-		if (!fs_get_stat( fs - 1, buffer, len )) {
-			xSnprintf(buffer, len, "err %d", 99);
+    if (this->pl->mountCount > 1 && fs >= 1 && fs <= this->pl->mountCount) {
+		if (fs_get_stat( fs - 1, buffer, len )) {
+			xSnprintf(buffer, len, "error: %d", errno);
 		}
 	} else {
-		xSnprintf(buffer, len, "err %d", 99);
+		xSnprintf(buffer, len, "err %d", fs);
 	}
 }
 
 static void fsUsageMeter_init(Meter* this) {
-   int fs = this->param;
-   if (this->pl->mountCount > 1 && fs > 1 && fs <= this->pl->mountCount) {
-      char caption[64];
+	char caption[64];
+	int fs = this->param;
+	if (this->pl->mountCount >= 1 && fs >= 1 && fs <= this->pl->mountCount) {
+      
 
       MountPoint *mount = GetMountPoints();
       if (mount != NULL ) {
@@ -42,9 +44,9 @@ static void fsUsageMeter_init(Meter* this) {
 		xSnprintf(caption, sizeof(caption), "fs_%d: ", fs);
 	  }
       Meter_setCaption(this, caption);
-   }
-   if (this->param == 0)
-      Meter_setCaption(this, "fsAvg");
+	} else {
+      xSnprintf(caption, sizeof(caption), "fsx_%d: ", fs);
+	}
 }   
   
 
