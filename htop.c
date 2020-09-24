@@ -188,7 +188,7 @@ int main(int argc, char** argv) {
       exit(1);
    }
 #endif
-   
+
    Process_setupColumnWidths();
    
    UsersTable* ut = UsersTable_new();

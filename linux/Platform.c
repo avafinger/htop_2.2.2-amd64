@@ -30,6 +30,7 @@ in the source distribution for its full text.
 #include "Armbian_Meter.h"
 #include "OS_Meter.h"
 #include "Kernel_Meter.h"
+#include "Users_Meter.h"
 #include "MemoryMeter.h"
 #include "SwapMeter.h"
 #include "TasksMeter.h"
@@ -230,6 +231,7 @@ MeterClass* Platform_meterTypes[] = {
    &BlockDevice_mmcblk1_ioStatsMeter_class,
    &BlockDevice_mmcblk2_ioStatsMeter_class,
    &BlockDevice_mmcblk3_ioStatsMeter_class,
+   &Users_Meter_class,
    NULL
 };
 
