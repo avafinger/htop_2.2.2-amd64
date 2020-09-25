@@ -2,27 +2,28 @@
 
 * htop 2.2.2-2
 
-https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.1
+  https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.1
 
-![F2 config](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/amd64.png)
+  ![F2 config](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/amd64.png)
 
 * htop 2.2.2-2 (fix)
 
-https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.2
+  https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.2
 
-![Core Freq and Temp](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/htop-core-monitor-freq-temp.png)
-
-
-![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0_stats.png)
+  ![Core Freq and Temp](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/htop-core-monitor-freq-temp.png)
 
 
-https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.3
+  ![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0_stats.png)
+
+
+  https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.3
 
 * htop 2.2.2-3 (Eth speed)
 
-![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth-stat-speed.png)
+  ![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth-stat-speed.png)
 
-# Block Device speed stats
+
+## Block Device speed stats
 
 Add support for Block speed stats for the following:
 * sda
@@ -41,13 +42,21 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.4
 
 * htop 2.2.2-7 (fs and fix)
 
-Add support for **fs** stats on mount points subdir compatible with **df** info.
-Display Size  Used Avail Use% 
+  Add support for **fs** stats on mount points subdir compatible with **df** info.
+  Display Size  Used Avail Use% 
 
-Minor fix for CoreFreq and CoreTemp
+  Minor fix for CoreFreq and CoreTemp
 
 
-https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.7
+  https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.7
+
+* htop 2.2.2-8 (Logged in users meter)
+
+  Add logged in user counter
+  
+  https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.8
+  
+  ![sda stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/htop_users.png)
 
 
 ## handlers
