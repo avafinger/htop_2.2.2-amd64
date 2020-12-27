@@ -74,6 +74,12 @@ int ReadMountPoints( char *fname ) {
 		if (buffer[0] != '/' || buffer[1] != 'd' || buffer[2] != 'e' || buffer[3] != 'v' || buffer[4] != '/') {
 			continue;
 		}
+            	// FIX ME
+		// Skip loopback and fuse? Mounting order changes every new boot and breaks the index saved in htoprc.
+		// we should look for the fs type...
+		if (buffer[5] != 'm' && buffer[5] != 's') {
+		    continue;
+		}
 		int ok = sscanf(buffer, "%s %s", &aMountPoint[idx].device, &aMountPoint[idx].subdir);
 		if (!ok) {
 			continue;
