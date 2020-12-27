@@ -1,3 +1,9 @@
+htop (2.2.2-9) unstable; urgency=medium
+
+  * Skip loopback dev in fs Meter.
+
+ -- Alexander Finger <alex.mobigo@gmail.com>  Thu, 27 Dec 2020 13:00:00 -0300
+
 htop (2.2.2-8) unstable; urgency=medium
 
   * Add Logged In User Meter.
