@@ -62,7 +62,7 @@ int ReadMountPoints( char *fname ) {
 
     fp = fopen(fname, "r");
     if (fp == NULL)
-        return NULL;
+        return 0; // no mount points
 
     // K.I.S.S
     if (aMountPoint == NULL) {
