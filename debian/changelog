@@ -1,3 +1,13 @@
+htop (2.2.2-10) unstable; urgency=medium
+
+  * gcc incorrectly returns a 32-bit pointer instead of 64-bit, declare the function in the module to fix this.. 
+  * Use new filename for settings, so it does not clash with the original version in case 
+    user install from not up to date distro. Use htoprc-ng as the new file name.
+    ~/.config/htop/htoprc-ng
+    root/.config/htop/htoprc-ng
+
+ -- Alexander Finger <alex.mobigo@gmail.com>  Fri, 05 Mar 2021 12:00:00 -0300
+
 htop (2.2.2-9) unstable; urgency=medium
 
   * Skip loopback dev in fs Meter.

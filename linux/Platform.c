@@ -812,6 +812,8 @@ int Platform_getIO_stats(char *devname, int idx, int close_fp) {
             fclose(fp_block_dev);
         return 0;
     }
+    if (devname && *devname == 0)
+        return 0;
 
     if (fp_block_dev == NULL) {
         xSnprintf(block_device, sizeof(block_device), "/sys/block/%s/stat", devname);

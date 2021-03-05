@@ -404,7 +404,7 @@ static void BlockDevice_mmcblk0_ioStatsMeter_setValues(Meter* this, char* buffer
         Platform_BlockDevice_mmcblk0_stats.write_sectors_comp = Platform_BlockDevice_mmcblk0_stats.write_sectors;
 
     } else {
-            xSnprintf(buffer, len, "%s", "unavailable");
+        xSnprintf(buffer, len, "%s", "unavailable");
     }
 }
 

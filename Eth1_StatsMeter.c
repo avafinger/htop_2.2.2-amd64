@@ -76,7 +76,7 @@ static void Eth1_StatsMeter_setValues(Meter* this, char* buffer, int len) {
 
 MeterClass Eth1_StatsMeter_class = {
    .super = {
-        .extends = Class(Meter),
+      .extends = Class(Meter),
       .delete = Meter_delete
    },
    .updateValues = Eth1_StatsMeter_setValues, 
