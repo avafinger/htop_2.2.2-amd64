@@ -110,7 +110,7 @@ https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.4
 
 Override default handlers for different kernel versions and configs.
 
-Files: ~/.config/htop/htoprc and /root/.config/htop/htoprc
+Files: ~/.config/htop/htoprc-ng and /root/.config/htop/htoprc-ng
 
     # SBC hardware and Kernel specific path.
     # Editable manually.
