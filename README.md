@@ -11,8 +11,8 @@
   https://github.com/avafinger/htop_2.2.2-amd64/releases/tag/v0.2
 
   ![Core Freq and Temp](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/htop-core-monitor-freq-temp.png)
-
-
+  
+  
   ![Eth0 stats](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/eth0_stats.png)
 
 
@@ -515,3 +515,5 @@ and the longest would be:
     56000
     57000
     57000
+
+![htop 2.2.2-10 on RockPi X](https://github.com/avafinger/htop_2.2.2-amd64/raw/master/rockpix_handlers.png
