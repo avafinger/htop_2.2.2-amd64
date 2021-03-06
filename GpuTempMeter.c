@@ -20,7 +20,7 @@ static void GpuTempMeter_setValues(Meter* this, char* buffer, int len) {
    if (Temp > 1000) {
        Temp /= 1000;
    }
-   xSnprintf(buffer, len, "%4d C", Temp);
+   xSnprintf(buffer, len, "%4d °C", Temp);
 }
 
 MeterClass GpuTempMeter_class = {
@@ -35,5 +35,5 @@ MeterClass GpuTempMeter_class = {
    .attributes = GpuTempMeter_attributes,
    .name = "GpuTemp",
    .uiName = "GpuTemp",
-   .caption = "Gpu Temp: "
+   .caption = "GPU Temp: "
 };

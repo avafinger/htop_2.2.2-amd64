@@ -20,7 +20,7 @@ static void CpuTempMeter_setValues(Meter* this, char* buffer, int len) {
    if (Temp > 1000) {
        Temp /= 1000;
    }
-   xSnprintf(buffer, len, "%4d C", Temp);
+   xSnprintf(buffer, len, "%4d °C", Temp);
 }
 
 MeterClass CpuTempMeter_class = {
@@ -35,7 +35,7 @@ MeterClass CpuTempMeter_class = {
    .attributes = CpuTempMeter_attributes,
    .name = "CpuTemp",
    .uiName = "CpuTemp",
-   .caption = "Cpu Temp: "
+   .caption = "CPU Temp: "
 };
 
 int CoreTempMeter_attributes[] = {
@@ -52,7 +52,7 @@ static void CoreTempMeter_setValues(Meter* this, char* buffer, int len) {
    if (Temp > 1000) {
        Temp /= 1000;
    }
-   xSnprintf(buffer, len, "%4d C", Temp);
+   xSnprintf(buffer, len, "%4d °C", Temp);
 }
 
 static void CoreTempMeter_init(Meter* this) {
@@ -78,6 +78,6 @@ MeterClass CoreTempMeter_class = {
    .attributes = CoreTempMeter_attributes,
    .name = "CoreTemp",
    .uiName = "CoreTemp",
-   .caption = "CoreTemp",
+   .caption = "CoreTemp :",
    .init = CoreTempMeter_init
 };

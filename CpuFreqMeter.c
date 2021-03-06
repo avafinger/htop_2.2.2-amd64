@@ -104,7 +104,7 @@ MeterClass CpuFreqMeter_class = {
    .attributes = CpuFreqMeter_attributes,
    .name = "CpuFreq",
    .uiName = "CpuFreq",
-   .caption = "Cpu Freq: ",
+   .caption = "CPU Freq: ",
 };
 
 int CoreFreqMeter_attributes[] = {
@@ -159,6 +159,6 @@ MeterClass CoreFreqMeter_class = {
    .attributes = CoreFreqMeter_attributes,
    .name = "CoreFreq",
    .uiName = "CoreFreq",
-   .caption = "CoreFreq",
+   .caption = "CoreFreq :",
    .init = CoreFreqMeter_init
 };
